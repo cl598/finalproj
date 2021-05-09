@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>SPA SDK Sample</title>
+    <link rel="stylesheet" type="text/css" href="/public/css/main.css" />
+</head>
+
+<body>
+<h2>IS 219 - 002 Final Project</h2>
+
+<script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js"></script>
+<script src="public/js/app.js"></script>
+
+<button id="btn-login" onclick="login()">Log in</button>
+<button id="btn-logout" onclick="logout()">Log out</button>
+
+<!-- ... -->
+
+<div class="hidden" id="gated-content">
+    <p>
+        You're seeing this content because you're currently
+        <strong>logged in</strong>.
+    </p>
+    <label>
+        Access token:
+        <pre id="ipt-access-token"></pre>
+    </label>
+    <label>
+        User profile:
+        <pre id="ipt-user-profile"></pre>
+    </label>
+</div>
+
+<!-- .. existing script tags .. -->
+
+</body>
+
