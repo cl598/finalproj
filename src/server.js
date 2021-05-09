@@ -1,4 +1,5 @@
 const express = require("express");
+const { join } = require("path");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const db = require("./app/models");
@@ -8,7 +9,7 @@ var corsOptions = {
     origin: "http://localhost:8081"
 };
 
-app.use(cors(corsOptions));
+app.use(express.static(join(__dirname, "public")));
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
@@ -17,18 +18,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // simple route
-app.get("/", (req, res) => {
-    res.json({ message: "Welcome to bezkoder application." });
+app.get("/auth_config.json", (req, res) => {
+    res.sendFile(join(__dirname, "auth_config.json"));
+});
+
+app.get("/*", (_, res) => {
+    res.sendFile(join(__dirname, "index.html"));
 });
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}.`);
-});
+app.listen(3000, () => console.log("Application running on port 3000"));
 
 db.sequelize.sync({ force: true }).then(() => {
     console.log("Drop and re-sync db.");
 });
-
-require("./app/routes/turorial.routes")(app);
